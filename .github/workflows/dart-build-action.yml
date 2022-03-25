@@ -21,4 +21,4 @@ jobs:
         run: dart pub get
 
       - name: Build
-        run: dart compile exe -o build/sass2scss_${{matrix.os}} bin/sass_scss_dart.dart 
+        run: dart compile exe -o sass2scss_${{matrix.os}} bin/sass_scss_dart.dart 
