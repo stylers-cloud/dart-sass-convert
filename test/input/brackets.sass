@@ -1,0 +1,3166 @@
+// stylers.cloud project id
+$projectId: '401c3af0-84e2-11ec-a71f-2dcedd368569'
+// relative path from location of this CSS file to the assets (without slash at the end)
+$local-url-prefix: '..'
+// absolute path to our CDN server (without slash at the end)
+$hosted-url-prefix: '//rest-api-storage-dev.s3.eu-central-1.amazonaws.com/' + $projectId
+// map of hosted assets relative urls to hash codes
+$hosted-assets-map: ('/vector-1.svg': '08b3bb5f3953d6ba7e862776cd41ff2a', '/chevron-down.svg': '09a5f58f1a31de34f0f859fda4c0613c', '/wire.svg': '141899f980fde72d707e320c10c5c5d2', '/polygon-sporenie.svg': '31934c3d3493bd2d560df926b6d184a0', '/icon-clock.svg': '382a56ff89c53a403cdbdfdc4a34c0be', '/cookie.png': '3ac25acef299b98f1527ccee85b6cfc4', '/slider-arrow-right.svg': '64bbe7cff3adeea1d6b5fcc99a044dc5', '/polygon-pozicky.svg': '6f693007201373348e33a2df62191636', '/polygon-investovanie.svg': '78ed31a4e026e0ecc02d155cf379d08b', '/slider-arrow-left.svg': '7a006eae065462f39a721bb3ec6bba67', '/polygn-poistenie.svg': '7aaa9e972a032932775e466d6db36083', '/shadow.png': '879cf4189014ded028e4dc2df6baf7d3', '/polygon-green.png': '9160dd5053b7c56a2de0b0769d6b6c2b', '/polygon-ucty.svg': 'a4fdbac69aa0dfac12f66a893caac777', '/polygon-optimalizovanie.svg': 'a5de22ade340bc1553b2cc585d3c7819', '/blue-check.svg': 'aee46e83ba69cd4cb476cf4e43d627b4', '/polygon.svg': 'c32ba804e0abbb9ee6c800c989ff2f16', '/icon-handshake.svg': 'c8a4eaf229d7e6d49b2dfd1dd70182ce', '/blured-polygon.png': 'cb191979f0009bc87195a75d6183a0aa', '/polygon-celkovy-pohlad.svg': 'd60b580d0539f8bd38860e61ba0139ba', '/check-indicator.svg': 'ea2dadb04b1fa2468b1eb6012f56cd2d', '/check.svg': 'ed6e87311cb9da51d1433091982c7b61', '/plus.svg': 'f2cbaa83154b5030206f9fff892a3127')
+
+@function local-url($relative-path)
+    @return url($local-url-prefix + $relative-path)
+
+@function external-url($absolute-path)
+    @return url($absolute-path)
+
+@function hosted-url($relative-path)
+    @return url($hosted-url-prefix +'/'+ map-get($hosted-assets-map, $relative-path))+'/* ' + $relative-path + ' */'
+
+
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;700;800;900&display=swap')
+
+// ABSTRACTS
+$black: #000000
+$white: #ffffff
+$indigo900: #000066
+$primary200: #A1B9E4
+$primary500: #2B5093
+$primary600: #24437B
+$secondary400: #2FD1FD
+$sky50: #E0F0FA
+$sky200: #81C2EE
+$darkGray: #171717
+$slate900: #0F172A
+$slate500: #64748B
+$slate400: #94A3B8
+$slate200: #E2E8F0
+$slate100: #F1F5F9
+$slate50:  #F8FAFC
+$cyan: #02BEF2
+
+$headerTopPadding: 6.8rem
+$headerHeight: 9.3rem
+$headerFixedHeight: 14rem
+
+$baseFont: 'Mulish', Arial, Helvetica, Tahoma, sans-serif
+$baseFontSize: 2rem
+$baseLineHeight: 3.2rem
+
+$fwNormal: 400
+$fwMedium: 500
+$fwBold: 700
+$fwExtraBold: 800
+$fwBlack: 900
+
+$dur: 400ms
+
+
+//MIXINS
+@mixin appearance($val)
+    -webkit-appearance: $val
+    -moz-appearance: $val
+    appearance: $val
+
+@mixin shadow($l, $r, $b, $s, $c)
+    -webkit-box-shadow: $l $r $b $s $c
+    -moz-box-shadow: $l $r $b $s $c
+    box-shadow: $l $r $b $s $c
+
+@mixin box-sizing($val)
+    -webkit-box-sizing: $val
+    -moz-box-sizing: $val
+    box-sizing: $val
+
+@mixin transition($prop, $dur, $eas, $del)
+    -webkit-transition: $prop $dur $eas $del
+    -moz-transition: $prop $dur $eas $del
+    -ms-transition: $prop $dur $eas $del
+    -o-transition: $prop $dur $eas $del
+    transition: $prop $dur $eas $del
+
+@mixin transition-property($prop)
+    -webkit-transition-property: $prop
+    -moz-transition-property: $prop
+    -ms-transition-property: $prop
+    -o-transition-property: $prop
+    transition-property: $prop
+
+@mixin transition-duration($dur)
+    -webkit-transition-duration: $dur
+    -moz-transition-duration: $dur
+    -ms-transition-duration: $dur
+    -o-transition-duration: $dur
+    transition-duration: $dur
+
+@mixin translate($x, $y, $z: 0, $r: 0)
+    -webkit-transform: translate($x, $y)
+    -moz-transform: translate($x, $y)
+    -ms-transform: translate($x, $y)
+    -o-transform: translate($x, $y)
+    transform: translate($x, $y)
+
+@mixin safariRadiusFix()
+    -webkit-backface-visibility: hidden
+    -moz-backface-visibility: hidden
+    -webkit-transform: translate3d(0, 0, 0)
+    -moz-transform: translate3d(0, 0, 0)
+
+@mixin linearGradient($deg, $l, $r)
+    background: $l
+    background-image: linear-gradient($deg, $l, $r)
+    background: -moz-linear-gradient($deg, $l, $r)
+    background: -webkit-linear-gradient($deg, $l, $r)
+    background: -o-linear-gradient($deg, $l, $r)
+    background: -ms-linear-gradient($deg, $l, $r)
+    background: linear-gradient($deg, $l, $r)
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#{$l}, endColorstr=#{$r})
+
+$grid-media-shift: 1px
+$grid-breakpoints: ( xs: 540px, sm: 768px, md: 1024px, lg: 1366px, xl: 1600px, xxl: 1800px)
+
+@mixin less-than($breakPoint)
+    @media (max-width: map-get($grid-breakpoints, $breakPoint) - $grid-media-shift)
+        @content
+    
+
+@mixin more-than($breakPoint)
+    @media (min-width: map-get($grid-breakpoints, $breakPoint) - $grid-media-shift)
+        @content
+
+=hack
+    margin: 0
+
+//RESETS
+blockquote,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+figure,
+p,
+pre
+    margin: 0
+    padding: 0
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6
+    font-size: inherit
+    font-weight: inherit
+
+input,
+textarea,
+button,
+select,
+a
+    -webkit-tap-highlight-color: transparent
+
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object
+    display: block
+    user-drag: none
+    -webkit-user-drag: none
+    user-select: none
+    -moz-user-select: none
+    -webkit-user-select: none
+    -ms-user-select: none
+
+sup
+    vertical-align: baseline
+    position: relative
+    top: -1rem
+
+sub
+    vertical-align: baseline
+    position: relative
+    top: 1rem
+
+a
+    color: $primary500
+    text-decoration: none
+    @include transition-duration($dur)
+        
+    svg
+        display: inline-block
+        transform: scale(0.85)
+        margin-left: 0.15em
+        transform: translateY(0.125em)
+
+*
+    @include box-sizing(border-box)
+
+    &:focus
+        outline: none
+
+img
+    max-width: 100%
+
+//TEMPLATE
+html
+    margin: 0
+    padding: 0
+    font-size: 10px
+
+    @include less-than(lg)
+        font-size: 9px
+
+body
+    margin: 0
+    padding: 0
+    color: $slate500
+    font-family: $baseFont
+    font-weight: $fwNormal
+    font-size: $baseFontSize
+    line-height: $baseLineHeight
+    overflow-x: hidden
+    text-size-adjust: none !important
+    -moz-text-size-adjust: none !important
+    -webkit-text-size-adjust: none !important
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
+
+#app
+    overflow-x: hidden
+
+section
+    position: relative
+    padding-top: 9.8rem
+    padding-bottom: 9.8rem
+    
+    +less-than(xl)
+        padding-top: 4.4rem
+        padding-bottom: 4.4rem
+
+    +less-than(md)
+        padding-top: 6rem
+        padding-bottom: 6rem
+
+    & > .wrapper
+        width: 100%
+        max-width: 100rem
+        padding: 0 2.5rem
+        margin: 0 auto
+
+        +more-than(xl)
+            max-width: 120rem            
+
+    &#hero 
+        min-height: calc(100vh - 12.5rem)
+        display: flex
+        align-items: center
+        padding: calc(#{$headerTopPadding} + #{$headerHeight}) 0 0 0
+        +linearGradient(270deg, $sky50 0%, $white 100%)
+
+        +less-than(xl)
+            min-height: calc(100vh - 14.5rem)
+        
+        +less-than(md)
+            padding: 12rem 0 0 0
+            padding-top: 9rem
+
+        +less-than(sm)
+            padding-top: 7rem
+
+        .polygons
+            position: absolute
+            pointer-events: none
+            z-index: 1
+            left: 0
+            top: 0
+            right: 0
+            bottom: 0
+            overflow: hidden
+            
+            .polygon
+                position: absolute
+                mask: local-url('/images/polygon.svg?4cd8710ed1e108f0cd21d9dae794eed8') no-repeat center
+                -webkit-mask: local-url('/images/polygon.svg?4cd8710ed1e108f0cd21d9dae794eed8') no-repeat center
+                mask-size: 100% 100%
+                -webkit-mask-size: 100% 100%
+
+                &:first-child
+                    top: 20%
+                    left: -5rem
+                    width: 9.4rem
+                    height: 9.4rem
+                    background: #FFDA58
+                    transform: rotate(-74.29deg)
+
+                    @include less-than(lg)
+                        transform: rotate(-74.29deg) scale(0.6)
+                
+                &:nth-child(2)
+                    top: 50%
+                    left: -15rem
+                    width: 31.4rem
+                    height: 28.9rem
+                    background: local-url('/images/blured-polygon.png?a53f990d6c90f99811ba9ae821c6aac5') no-repeat center
+                    mask: none
+                    -webkit-mask: none
+
+                    @include less-than(lg)
+                        transform: translate(-15%,0) scale(0.6)
+
+                &:nth-child(3)
+                    top: 10%
+                    right: 3%
+                    width: 6.3rem
+                    height: 6.3rem
+                    background: #2B5093
+                    transform: rotate(-37.34deg)
+
+                    @include less-than(lg)
+                        transform: translate(15%,0) rotate(-37.34deg) scale(0.6)
+
+                    @include less-than(sm)
+                        transform: translate(50%,0) rotate(-37.34deg) scale(0.6)
+
+                &:nth-child(4)
+                    top: 40%
+                    right: -5rem
+                    width: 13.5rem
+                    height: 13.5rem
+                    background: local-url('/images/polygon-green.png?61bfc43c4e03d625ef474097dd074ef5') no-repeat center
+                    transform: rotate(105deg)
+                    mask: none
+                    -webkit-mask: none
+                    filter: blur(2rem)
+
+                    @include less-than(lg)
+                        transform: translate(15%, 0) scale(0.6)
+
+                &:nth-child(5)
+                    top: 60%
+                    right: 10%
+                    width: 2.8rem
+                    height: 2.8rem
+                    background: #02BEF2
+                    transform: rotate(-37.34deg)
+
+                    @include less-than(lg)
+                        transform: translate(15%, 0) rotate(-37.34deg) scale(0.6)
+
+        .wrapper
+            z-index: 5
+            display: flex
+            align-items: center
+            flex-wrap: wrap
+            max-height: auto
+            padding: 12rem 2.5rem
+
+            @media screen and (min-height: 900px)
+                padding-top: 0
+                padding-bottom: 0
+
+            +less-than(md)
+                padding: 6rem 2.5rem
+
+            +less-than(sm)
+                padding: 4rem 0 2.5rem
+
+            // fix for vertical align for IE
+            &::after
+                content: ''
+                display: block
+                width: 0
+                height: 60vh
+
+                @include less-than(md)
+                    display: none
+
+        .content
+            max-width: 57rem
+            width: 50%
+
+            @include less-than(md)
+                width: 90%
+                margin: 0 auto
+                text-align: center
+
+            p 
+                font-size: 2rem
+                line-height: 2.6rem
+                color: $darkGray
+                margin-bottom: 2.6rem
+
+                @include less-than(sm)
+                    font-size: 1.6rem
+                    margin-bottom: 1.5rem
+
+            h1 
+                padding-right: 2rem
+
+                @include less-than(md)
+                    padding: 0 4rem
+
+                @include less-than(sm)
+                    padding: 0 1rem
+
+            .text-slider
+                margin: 0.25rem 0 1.85rem
+                font-weight: $fwExtraBold
+                font-size: 6.2rem
+                line-height: 7.4rem
+                display: block                
+                position: relative
+                overflow: hidden
+                $height: 1.6em
+                height: $height     
+
+                @include less-than(md)
+                    font-size: 5.5rem
+                    line-height: 1em
+                    height: 1.4em
+
+                @include less-than(sm)
+                    font-size: 4.8rem           
+                
+                .text-wrapper
+                    display: inline-flex
+                    flex-direction: column
+                    align-items: flex-start
+                    animation: slide-up 10s infinite
+                    animation-timing-function: ease-in
+
+                    @include less-than(md)
+                        align-items: center
+
+                    .text-item
+                        display: inline-block
+                        padding-bottom: 0.25em
+                        background: local-url('/images/vector-1.svg?b3046557138bbabae34a3034ddaa73c9') no-repeat bottom
+                        background-size: 85% auto
+                        margin-bottom: 0.15em
+
+                        .text
+                            color: #3059A4
+                            
+                            @supports (background-clip: text) or (-webkit-background-clip: text)
+                                background: linear-gradient(-90deg, #3059A4 10%, #356BCC 100%)
+                                -webkit-background-clip: text
+                                background-clip: text
+                                -webkit-text-fill-color: transparent
+                                -webkit-box-decoration-break: clone
+                
+
+        .hero-image
+            width: 50%
+            text-align: right
+            
+            @include less-than(lg)
+                width: 45%
+
+            @include less-than(md)
+                width: 100%
+                text-align: center
+
+            img
+                width: 56.2rem
+                display: inline
+                margin-right: -10rem
+                margin-top: -4rem
+
+                @include less-than(lg)
+                    
+                    margin-right: -5rem                    
+
+                @include less-than(md)
+                    width: 70%
+                    margin-right: 0
+                    margin-top: 8rem                    
+
+        .images
+            position: relative
+            margin: 0 auto
+
+            @include less-than(md)
+                margin-top: 7rem
+
+            @include less-than(sm)
+                margin-top: 3rem
+                transform: scale(0.7)
+            
+            &::after
+                content: ''
+                position: absolute
+                width: 527px
+                height: 292.4px
+                background: local-url('/images/shadow.png?1d7c4377f33b084add92aea5d7a119c6') no-repeat center
+                top: 13.3rem
+                left: -4.8rem
+                mix-blend-mode: multiply
+
+                @include less-than(sm)
+                    top: 37%
+                    left: -21%
+                    transform: scale(0.7)
+
+            .floating
+                position: absolute
+
+                $interval: 10s
+
+                &:nth-child(2)
+                    top: 0rem
+                    left: 4rem
+                    animation: waving $interval 0s infinite                    
+
+                    +less-than(sm)
+                        left: 5%
+                        animation: wavingMobile $interval 0s infinite     
+
+                &:nth-child(3)
+                    top: 10rem
+                    left: 13.5rem
+                    animation: waving $interval -0.3333*$interval infinite
+
+                    +less-than(md)
+                        top: 13rem
+                        left: 15.5rem
+
+                    +less-than(sm)
+                        top: 38%
+                        left: 29%
+                        animation: wavingMobile $interval -0.3333*$interval infinite
+
+                &:nth-child(4)
+                    top: 2rem
+                    left: 24.5rem
+                    animation: waving $interval -0.6666*$interval infinite
+
+                    +less-than(md)
+                        left: 25.5rem
+                
+                    +less-than(sm)
+                        top: 10%
+                        left: 52%
+                        animation: wavingMobile $interval -0.6666*$interval infinite
+
+
+
+    &#advantages         
+        padding-bottom: 15rem
+        +linearGradient(90.39deg, #F4F9FD 50.99%, $white 99.65%)
+        background: local-url('/images/wire.svg?be80553689015ba7e6fa43027cc3d0fc') no-repeat center
+        background: local-url('/images/wire.svg?be80553689015ba7e6fa43027cc3d0fc') no-repeat center, linear-gradient(90.39deg, #F4F9FD 50.99%, $white 99.65%)
+
+        +less-than(xl)
+            padding-bottom: 7rem
+
+        +less-than(sm)
+            padding: 6rem 0
+        
+        h2
+            text-align: center
+
+        h2 + p
+            text-align: center
+            margin-bottom: 9.3rem
+
+
+    &#faqs
+        padding-top: 2.4rem
+        padding-bottom: 5rem
+
+        +less-than(xl)
+            padding-top: 2rem
+
+        +less-than(sm)
+            padding: 6rem 0
+
+        .wrapper > h2
+            text-align: center
+
+    &#finances
+
+        +less-than(sm)
+            padding: 6rem 0
+
+        h2
+            text-align: center
+
+        h2 + p
+            text-align: center
+            margin-bottom: 4rem
+
+        .content
+            +less-than(md)
+                display: flex
+                flex-direction: column
+
+            &::after
+                content: ''
+                clear: both 
+                display: table                
+                height: 0
+
+            .articles:not(#_)
+                +less-than(md)
+                    overflow: visible
+                    float: none
+                    order: 2
+                    max-height: none
+                    mask: none
+                    -webkit-mask: none
+                    margin-top: 5rem
+
+            .article
+                float: left
+                clear: left
+                width: 50%
+                padding-right: 5em
+                margin-top: 6rem
+                font-size: 1.6rem
+
+                +less-than(md)
+                    float: none
+                    width: 100%
+                    margin-top: 4rem
+
+                +less-than(sm)
+                    padding-right: 0
+
+                &:first-child
+                    margin-top: 0
+
+                .article-wrapper
+                    +less-than(md)
+                        padding: 0
+
+                h5
+                    font-size: 2rem
+                    font-weight: 800
+                    line-height: 2.4rem
+                    color: $darkGray                    
+                    margin-bottom: 2rem
+
+                p
+                    font-size: inherit
+                    line-height: 2.6rem
+                    margin-bottom: 2rem
+
+            .chart
+                margin-left: 50%
+                height: 0
+                padding-bottom: 50%
+                position: relative
+
+                +less-than(md)
+                    margin-left: 0
+                    padding-bottom: 100%
+                    order: 1
+
+                +less-than(sm)
+                    margin-top: 0rem
+
+                > div
+                    $size: 33%
+                    width: $size
+                    height: $size
+                    display: flex
+                    align-items: center
+                    justify-content: center                    
+                    text-align: center
+                    font-weight: bold
+                    line-height: 2.8rem
+                    margin-top: 0.25em
+                    padding: 0 2em
+                    position: absolute
+                    $hex-anim-duration: 6s
+                    animation: hexagon $hex-anim-duration infinite linear
+
+                    @include less-than(xl)
+                        font-size: 1.6rem
+                        line-height: 2.3rem
+
+                    @include less-than(md)
+                        font-size: 2rem
+                        line-height: 2.5rem
+
+                    @include less-than(sm)
+                        font-size: 1.2rem
+                        line-height: 1.6rem
+
+                    // optimalizovanie
+                    &:nth-child(1)
+                        left: 15% - $size/2
+                        top: 35% - $size/2
+                        color: #851F05
+                        background: 39% 45% / 98% local-url('/images/polygon-optimalizovanie.svg?fb0237672489f6242787e9500fffe96b') no-repeat
+                        animation-delay: 0 * $hex-anim-duration/7
+
+                    // investovanie
+                    &:nth-child(2)
+                        left: 17% - $size/2
+                        top: 70% - $size/2
+                        color: #333333
+                        background: 39% 45% / 98% local-url('/images/polygon-investovanie.svg?fc642507dc582969c75d3d67ac92dac5') no-repeat
+                        animation-delay: -4 * $hex-anim-duration/7
+
+                    // ucty
+                    &:nth-child(3)
+                        left: 50% - $size/2
+                        top: 0%
+                        color: #5C4400
+                        background: 37% 35% / 135% local-url('/images/polygon-ucty.svg?3034d1ea5bd56e9f234ec0bc7da3493e') no-repeat
+                        animation-delay: -1 * $hex-anim-duration/7
+
+                    // celkovy pohlad
+                    &:nth-child(4)
+                        left: 50% - $size/2
+                        top: 50% - $size/2
+                        color: #130556
+                        background: 39% 45% / 98% local-url('/images/polygon-celkovy-pohlad.svg?9967e546ee53e8af70ac180013631c45') no-repeat
+                        animation-delay: -3 * $hex-anim-duration/7
+                    
+                    // sporenie
+                    &:nth-child(5)
+                        left: 50% - $size/2
+                        bottom: 0%
+                        color: #0A522D
+                        background: 39% 45% / 98% local-url('/images/polygon-sporenie.svg?d4ea45360d25bcd2e3bddfad8f6a8859') no-repeat
+                        animation-delay: 6 * $hex-anim-duration/7
+
+                    // poistenie
+                    &:nth-child(6)
+                        right: 17% - $size/2
+                        top: 35% - $size/2
+                        color: #540556
+                        background: 39% 45% / 98% local-url('/images/polygn-poistenie.svg?ddf274b96221bfda29287a953be0015d') no-repeat
+                        animation-delay: -2 * $hex-anim-duration/7
+
+                    // pozicky
+                    &:nth-child(7)
+                        right: 17% - $size/2
+                        top: 70% - $size/2
+                        color: #045164
+                        background: 39% 45% / 98% local-url('/images/polygon-pozicky.svg?6e4df8fcf3fed66dfeff64aa749dc461') no-repeat
+                        animation-delay: -5 * $hex-anim-duration/7
+
+    &[section="map"],
+    &#map
+        text-align: center
+
+        +less-than(sm)
+            padding: 6rem 0
+
+        h2 + p
+            max-width: 74rem
+            margin: 0 auto 4rem
+
+        .map
+            height: 60rem
+            position: relative
+            border-radius: 3.2rem
+            overflow: hidden
+            box-shadow: 50px 50px 100px rgba(226, 232, 240, 0.4)
+
+    &#banks
+        padding-top: 6rem
+        padding-bottom: 0rem
+
+        +less-than(xl)
+            padding-top: 4.4rem
+            padding-bottom: 5.4rem
+            
+        +less-than(md)
+            padding-top: 6rem
+            padding-bottom: 8rem
+        
+        +less-than(sm)
+            padding-top: 2.4rem
+
+        .wrapper
+            display: flex
+            align-items: center            
+            position: relative
+
+            +less-than(sm)
+                flex-direction: column
+                text-align: center
+
+            &::after
+                content: ''
+                position: absolute
+                left: 2.5rem
+                bottom: -1rem
+                width: calc(100% - 5rem)
+                height: 1px
+                background: $slate200
+
+                +less-than(xl)
+                    bottom: -5rem
+
+                +less-than(md)
+                    bottom: -7rem
+
+            .content
+                margin-right: auto
+                margin-top: -6rem
+                
+                +less-than(xl)
+                    margin-top: 0rem
+                
+                +less-than(sm)
+                    margin: 4rem 0
+
+                p:first-child            
+                    font-weight: $fwExtraBold
+                    font-size: 2.8rem
+                    line-height: 2rem
+                    color: $darkGray
+                    margin-bottom: 0.8rem
+
+                p:last-child
+                    font-size: 1.6rem
+                    line-height: 2rem
+                    color: $darkGray
+
+            .images
+                display: flex
+                align-items: center
+                max-width: 100%
+                padding-right: 1rem
+                margin: -6rem 0 0 0
+
+                +less-than(xl)
+                    margin: -4rem 0
+
+                +less-than(md)
+                    justify-content: center
+                    flex-wrap: wrap
+                    margin: -3rem 0
+
+                +less-than(sm)
+                    margin-top: 2rem
+                    margin: -4rem 0
+
+                svg 
+                    margin: 6rem * 0.5
+                    
+                    +less-than(xl)
+                        margin: 4rem * 0.5
+
+                    +less-than(md)
+                        min-width: calc(100% / 4)
+                        margin: 3rem * 0.5
+
+                    +less-than(sm)
+                        min-width: 0
+                        max-width: calc(100% / 5)
+                        margin: 4rem * 0.5
+
+    &#how-it-works
+        overflow: hidden
+
+        @include less-than(sm)
+            padding: 6rem 0
+
+        .wrapper > p
+            font-weight: $fwExtraBold
+            font-size: 2.4rem
+            line-height: 3rem
+            color: $darkGray
+            text-align: center
+
+        h2
+            text-align: center
+
+        .card-wrapper
+            display: flex
+            justify-content: center
+            margin: 0 0 8rem
+            padding: 0
+            
+            // IE version of gap: 4rem
+            margin: 4rem * -0.5
+            margin-bottom: 6rem
+
+            +less-than(md)
+                // IE version of gap: 2rem
+                margin: 2rem * -0.5
+                margin-bottom: 3rem
+
+            +less-than(sm)
+                flex-direction: column
+                margin: 0 0 4rem
+
+            & > li
+                min-width: 26.5rem
+                // IE version of gap: 4rem
+                margin: 4rem * 0.5
+
+                @include less-than(md)
+                    flex: 1
+                    min-width: 0
+                    // IE version of gap: 2rem
+                    margin: 2rem * 0.5
+
+
+    .tns-outer
+        width: 100vw
+        left: 50%
+        position: relative
+        @include translate(-50%, 0, 0)
+
+    .tns-ovh
+        overflow: visible
+
+    .tns-outer
+        display: flex
+        flex-direction: column-reverse
+
+    .tns-liveregion
+        display: none
+
+    .tns-controls
+        display: block
+        position: absolute
+        left: 50%
+        z-index: 5
+        width: 99rem
+        max-width: 90vw
+        pointer-events: none
+        display: flex
+        top: 50%
+        justify-content: space-between
+        +translate(-50%, 0, 0)
+
+        button 
+            border: 0
+            background: $white
+            overflow: hidden
+            text-indent: -100rem
+            padding: 0
+            margin: 0
+            pointer-events: auto
+            position: relative
+            width: 5rem
+            height: 5rem
+            border-radius: 2rem
+            +shadow(0, 0.2rem, 0.4rem, -0.1rem, rgba(0, 0, 0, 0.06))
+            +appearance(none)
+
+            &:disabled
+                opacity: 0
+                pointer-events: none
+
+            &:first-child::before
+                background: hosted-url('/slider-arrow-left.svg') no-repeat center
+
+            &:last-child::before
+                background: hosted-url('/slider-arrow-right.svg') no-repeat center
+
+            &:before
+                content: ''
+                width: 100%
+                height: 100%
+                left: 0
+                top: 0
+                position: absolute
+
+    .tns-slider:not(#_)        
+        margin-top: 6.2rem
+
+        .tns-item:not(#_)
+
+            &.slide-rotated
+                opacity: 0.5
+                        
+
+            .slide-wrapper__inner
+                display: flex
+                justify-content: center
+                flex-direction: column
+                width: 80rem
+                max-width: 100%
+                height: 32rem
+                background: $white
+                padding: 2.4rem 4.4rem 2.4rem 47rem
+                margin: 0 auto
+                border-radius: 3.2rem
+                position: relative
+                +shadow(5rem, 5rem, 10rem, 0, rgba(226, 232, 240, 0.4))
+
+                +less-than(lg)
+                    padding-left: 35rem
+
+                +less-than(md)
+                    width: 60rem
+                    height: 25rem
+                    padding-left: 25rem
+                    padding-right: 2.4rem
+
+                +less-than(sm)
+                    width: 32rem
+                    height: auto
+                    padding: 2.4rem
+
+                //unset default stylu
+                .slide__image
+                    all: unset
+                    position: absolute
+                    left: 4.4rem
+                    width: 38rem
+                    height: 26rem
+
+                    +less-than(lg)
+                        $k: 0.7
+                        width: 38 * $k + rem
+                        height: 26 * $k + rem
+
+                    +less-than(md)
+                        $k: 0.4
+                        width: 38 * $k + rem
+                        height: 26 * $k + rem
+
+                    +less-than(sm)
+                        position: relative
+                        width: 100%
+                        height: 20rem
+                        left: auto
+                        margin-bottom: 3rem
+
+                    img 
+                        position: absolute
+                        width: 100%
+                        height: 100%
+                        top: 0
+                        left: 0
+                        object-fit: contain
+
+            //unset default stylu
+            h4
+                all: unset
+                font-weight: $fwExtraBold
+                font-size: 1.8rem
+                line-height: 1.3
+                color: $darkGray
+
+                +less-than(sm)
+                    text-align: center
+
+            //unset default stylu
+            p
+                all: unset
+                font-size: 1.6rem
+                line-height: 1.3
+                color: $slate500
+                margin-top: 1.4rem
+
+                +less-than(sm)
+                    text-align: center
+
+    .tns-nav
+        display: flex
+        align-items: center
+        justify-content: center
+        margin-top: 8rem            
+
+        @include less-than(sm)
+            margin-top: 5rem
+
+        button
+            cursor: pointer
+            background: transparent
+            width: 1.6rem
+            min-width: 1.6rem
+            max-width: 1.6rem
+            height: 1.6rem
+            min-height: 1.6rem
+            max-height: 1.6rem
+            padding: 0
+            border: 1px solid #CBD5E1
+            display: block !important
+            @include appearance(none)
+            @include transition-duration(0.3s)
+            border-radius: 50%
+
+            &:not(:last-child)
+                margin-right: 1rem
+
+            &.tns-nav-active
+                background: $primary500
+                border-color: $primary500
+
+    &#member
+        padding: 9.6rem 0
+        @include linearGradient(90deg, #356BCC 0%, #2B5093 100%)
+
+        @include less-than(sm)
+            padding: 6rem 0
+
+        & > .wrapper
+            display: flex
+            align-items: center
+
+            @include less-than(md)
+                flex-direction: column
+                justify-content: center
+                text-align: center
+
+            // gap
+            > div:not(:last-child)
+                margin-right: 10rem
+
+                +less-than(lg)
+                    margin-right: 7rem
+
+                +less-than(md)
+                    margin-right: 0
+                    margin-bottom: 7rem
+
+        .content
+            color: $white
+
+            & > div:first-child
+                font-weight: $fwBold
+                font-size: 2.4rem
+                line-height: 3.2rem
+                margin-bottom: 2rem
+
+                span
+                    color: $cyan
+
+            p
+                color: $white
+
+        .images
+            display: flex
+            align-items: center
+
+            @include less-than(sm)
+                justify-content: space-between
+
+            & > *
+                //gap
+                &:not(:last-child)
+                    margin-right: 10rem
+
+                    @include less-than(sm)
+                        margin-right: 4rem
+
+                @include less-than(sm)
+                    max-width: 40%
+
+
+.slider__pagination
+    display: flex
+    align-items: center
+    justify-content: center
+    list-style: none
+    margin: 6rem 0 0 0
+    padding: 0
+    gap: 1rem
+
+    .slider__page
+        width: 1.6rem
+        height: 1.6rem
+        text-indent: -100rem
+        overflow: hidden
+        border: 1px solid #CBD5E1
+        cursor: pointer
+        border-radius: 50%
+
+        &.--active
+            background: $primary500
+            border-color: $primary500
+
+#navigation
+    position: fixed
+    left: 0
+    top: 0
+    padding: $headerTopPadding 0 2.4rem 0
+    width: 100vw
+    z-index: 1000
+    display: flex
+    transition: background 0.3s, padding 0.3s, height 0.3s, box-shadow 0.3s
+
+    &.mobile-app-hover-bg
+        background: $white
+
+    +less-than(md)
+        height: auto
+        background: $white
+        +shadow(0, 0.4rem, 8rem, 0,  #E2E8F0)
+        padding: 1.6rem 0   
+
+    body.scrolled &
+        top: 0
+        height: auto
+        padding: 1.6rem 0
+        background: $white
+        +shadow(0, 0.4rem, 8rem, 0,  rgba(71, 85, 105, 0.15))
+
+    .wrapper
+        width: 100%
+        $pad: 2.5rem
+        max-width: 120rem
+        padding: 0 $pad
+        margin: 0 auto
+        display: flex
+        align-items: center
+
+        +more-than(xl)
+            max-width: 148rem
+
+
+    .mobile-menu-check
+        position: absolute
+        right: 2.5rem
+        top: 50%
+        width: 30px
+        height: 30px
+        margin: 0
+        margin-top: -15px
+        display: block
+        z-index: 4
+        border: 0
+        padding: 0
+        opacity: 0
+        cursor: pointer
+        -webkit-touch-callout: none
+
+        &:checked 
+            & ~ .mobile-menu-hamburger
+                span:nth-child(1)
+                    transform: translate3d(0, 6px, 0) rotate(45deg)
+
+                span:nth-child(2)
+                    opacity: 0
+            
+                span:nth-child(3)
+                    transform: translate3d(0, -6px, 0) rotate(-45deg)
+
+            & ~ .menu
+                visibility: visible
+                opacity: 1
+        
+    .mobile-menu-hamburger
+        position: absolute
+        right: 2.5rem
+        top: 50%
+        width: 30px
+        height: 30px
+        margin-top: -15px
+        display: none
+        z-index: 3
+
+        +less-than(md)
+            display: flex
+            flex-direction: column
+            justify-content: center
+
+        span
+            margin: 0.2rem 0
+            width: 30px
+            height: 2px
+            background: $primary500
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)
+            border-radius: 0.6rem
+
+    .logo
+        min-width: 17.5rem
+        width: 17.5rem
+        height: 9.5rem
+        margin-right: auto
+        position: relative
+        z-index: 100
+        +transition-duration(0.3s)
+
+        body.scrolled &
+            top: -0.25rem
+
+            +more-than(lg)
+                $k: 0.6 
+                min-width: 17.5 * $k + rem
+                width: 17.5 * $k + rem
+                height: 9.5 * $k + rem
+
+        +less-than(xl)
+            $k: 0.8 
+            min-width: 17.5 * $k + rem
+            width: 17.5 * $k + rem
+            height: 9.5 * $k + rem            
+
+        +less-than(lg)
+            $k: 0.6 
+            min-width: 17.5 * $k + rem
+            width: 17.5 * $k + rem
+            height: 9.5 * $k + rem
+            top: -0.35rem
+
+        +less-than(sm)
+            $k: 0.5 
+            min-width: 17.5 * $k + rem
+            width: 17.5 * $k + rem
+            height: 9.5 * $k + rem
+            top: 0
+
+        svg 
+            width: 100%
+            height: 100%
+
+    .menu
+        display: flex
+        align-items: center
+
+        +less-than(md)
+            position: fixed
+            overflow: auto
+            padding: 8rem 2.5rem 3rem
+            top: 0
+            left: 0
+            right: 0
+            bottom: 0
+            background: $white
+            visibility: hidden
+            flex-direction: column
+            opacity: 0
+            +transition-duration(400ms)
+
+        .main-links,
+        .app-links
+            list-style: none
+            margin: 0
+            padding: 0
+            display: flex
+            align-items: center
+                    
+            +less-than(md)
+                width: 100%
+                flex-direction: column
+
+                li
+                    width: 100%
+
+            a:not(.btn) 
+                padding: 1rem 1.4rem
+                font-weight: $fwBold
+                font-size: 1.6rem
+                line-height: 2rem
+                color: $indigo900                
+                border-radius: 1.2rem
+                white-space: nowrap
+
+                +less-than(md)
+                    padding: 2rem 0
+                    font-size: 2rem
+                    display: block
+                    text-align: center
+
+                &:hover 
+                    background-color: rgba(#0078ad, 0.06)
+
+                &:active,
+                &.active
+                    background-color: rgba(#0078ad, 0.11)
+
+            .btn
+                +less-than(md)
+                    display: flex
+                    justify-content: center
+                    font-size: 2rem
+                    height: auto
+                    padding: 2rem 0
+
+        .main-links
+            li
+                padding: 0 0.2rem
+
+                +less-than(xl)
+                    padding: 0 0.1rem
+
+                +less-than(md)
+                    padding: 0
+
+        .app-links
+            margin-left: 3rem
+            gap: 1.2rem
+
+            +less-than(md)
+                margin-left: 0
+
+            +less-than(sm)
+                gap: 0
+
+            a.btn
+                white-space: nowrap
+
+            .mobile-app
+                position: relative
+
+                // no support for gap
+                margin-right: 1.2rem
+                    
+                @supports (gap: 0)
+                    margin-right: 0
+
+                @include less-than(sm)
+                    margin-bottom: 2rem
+                    margin-right: 0
+
+                &:after 
+                    content: ''
+                    left: -3rem
+                    right: -3rem
+                    height: 5rem
+                    top: 100%
+                    position: absolute
+                    display: none
+
+                &:hover
+                    &:after 
+                        display: block
+
+                    .hover-menu-app
+                        visibility: visible
+                        opacity: 1
+
+                        @include less-than(md)
+                            display: block
+
+                    a
+                        background-color: rgba(#0078ad, 0.11)
+
+
+            .hover-menu-app 
+                position: fixed
+                left: 0
+                right: 0
+                top: 17.5rem
+                background: $white
+                padding: 4.6rem 0 7.8rem 0
+                visibility: hidden
+                opacity: 0
+                @include transition-duration(200ms)
+                box-shadow: 0px 30px 30px rgba($slate200, 0.6)
+
+                @include less-than(xl)
+                    top: 16.5rem
+
+                @include less-than(lg)
+                    top: 13.5rem
+
+                body.scrolled &
+                    top: 9.2rem
+
+                    @include less-than(lg)
+                        top: 9.2rem
+
+                    @include less-than(md)
+                        top: 0
+
+                &::before
+                    content: ''
+                    position: absolute
+                    //@include linearGradient(270deg, $sky50 0%, $white 100%)
+                    left: 0
+                    top: 0
+                    right: 0
+                    height: 7.5rem
+
+                    body.scrolled &
+                        display: none
+
+                    @include less-than(md)
+                        display: none
+
+                &::after
+                    content: ''
+                    position: absolute
+                    @include linearGradient(0deg, white 0%, rgba(white, 0) 100%)
+                    left: 0
+                    right: 0
+                    top: 0
+                    height: 7.5rem
+
+                    +less-than(md)
+                        display: none
+
+                +less-than(md)
+                    top: 11rem
+                    box-shadow: none
+
+                +less-than(md)
+                    position: relative
+                    visibility: visible
+                    width: 100%
+                    top: auto
+                    padding: 2.5rem 0
+                    display: none
+                    opacity: 1
+
+                .wrapper
+                    display: flex
+                    max-width: 120rem
+                    align-items: flex-start
+                    flex-direction: column
+                    flex-wrap: wrap
+                    height: 21em
+                    position: relative
+                    z-index: 1
+
+                    +less-than(xl)
+                        max-width: 100rem
+
+                    +less-than(md)
+                        padding: 0
+                        text-align: center
+                        align-items: center
+                        height: auto
+                        padding-bottom: 2rem
+                    
+                    .content
+                        width: 45%
+
+                        @include less-than(sm)
+                            width: auto
+                            margin-left: 3rem
+                            margin-right: 3rem
+
+                        h3
+                            font-size: 2.4rem
+                            font-weight: 800
+                            line-height: 3rem
+                            color: $darkGray
+                            margin-bottom: 1rem
+                            
+                            +less-than(xl)
+                                font-size: 2.0rem
+
+                            +less-than(md)
+                                display: none // there is already a header (in mobile menu)
+
+                        
+                    .download-links                          
+                        margin-top: 5rem
+                        display: flex
+                        align-items: center
+
+                        @include less-than(md)
+                            margin-top: 3rem
+                            width: 100%
+                            flex-direction: column
+                            gap: 2rem
+
+                        a:not(#_)
+                            display: inline-flex
+                            align-items: center
+                            border: 1px solid $slate200
+                            box-sizing: border-box
+                            border-radius: 1.6rem
+                            margin-right: 2rem
+                            padding: 1rem 1.5rem
+                            min-width: 19rem
+                            background-color: transparent
+
+                            @include less-than(md)
+                                // no support for gap
+                                margin-top: 2rem
+                        
+                                @supports (gap: 0)
+                                    margin-top: 0
+                                
+
+                            @include less-than(md)
+                                min-width: 19rem
+                                margin-right: 0
+                                justify-content: center
+
+                            @include less-than(sm)
+                                min-width: 100%
+
+                            &:hover
+                                background-color: $slate50
+
+                            &:active
+                                background-color: $sky50
+
+                            img 
+                                margin-right: 1.6rem
+
+                            > div
+                                align-items: center
+                                min-width: 10rem
+                                padding-right: 2rem
+                                white-space: nowrap
+                                text-align: left                                
+
+                                @include less-than(md)
+                                    padding-right: 1rem
+                               
+                                p:first-child
+                                    font-size: 1.2rem
+                                    line-height: 1.5rem
+                                    color: $slate400
+
+                                p:last-child
+                                    font-size: 1.6rem
+                                    line-height: 2rem
+                                    font-weight: 600
+                                    color: $indigo900
+
+                    .mobile-showcase
+                        position: relative
+                        overflow: hidden
+                        margin-left: auto
+                        width: 38%
+                        height: 100%
+
+                        @include less-than(md)
+                            display: none
+
+                        img
+                            position: absolute
+
+                            &:first-child                                
+                                height: 100%
+                                left: 50%
+                                top: 0
+                                z-index: 1
+                                transform: translateX(-50%)
+
+                            &:last-child
+                                width: 100%
+                                left: 0
+                                bottom: 0
+                                z-index: 0
+
+
+
+footer
+    padding: 6rem 0
+    border-top: 1px solid $slate200
+
+    .wrapper
+        width: 100%
+        max-width: 153rem
+        padding: 0 2.5rem
+        margin: 0 auto
+
+        .footer__top
+            display: flex
+            align-items: center
+            margin-bottom: 4rem
+
+            @include less-than(lg)
+                display: block
+                
+                & > ul
+                    justify-content: center
+
+                    li:last-child a 
+                        padding-right: 0
+
+            @include less-than(sm)
+                & > ul
+                    flex-direction: column
+
+                    li
+                        text-align: center
+                        padding: 0.5rem 0
+
+                        a
+                            padding-right: 0
+
+            & > div:last-child 
+                display: flex
+                align-items: center
+                margin-left: auto
+
+                @include less-than(lg)
+                    margin-top: 4rem
+                    flex-direction: column
+
+                    .copyright
+                        order: 2
+                        margin-top: 3rem
+
+                @include less-than(sm)
+                    text-align: center
+                    flex-direction: column
+
+        .footer__bottom > div
+            display: flex
+            align-items: center
+            margin-left: auto            
+
+            @include less-than(sm)
+                flex-direction: column
+                text-align: center
+
+            svg
+                width: 17.3rem
+                min-width: 17.3rem
+                height: 9.4rem
+                margin-right: 6rem
+
+                @include less-than(md)
+                    $k: 0.6 
+                    min-width: 17.3 * $k + rem
+                    width: 17.3 * $k + rem
+                    height: 9.3 * $k + rem
+
+                @include less-than(sm)
+                    margin-right: 0
+                    margin-bottom: 3rem
+
+            p
+                font-size: 1.8rem
+                line-height: 2.8rem
+                color: $slate400
+
+                @include less-than(md)
+                    font-size: 1.5rem
+                    line-height: 2rem
+
+    ul
+        list-style: none
+        margin: 0
+        padding: 0
+        display: flex
+
+        a
+            font-weight: $fwBold
+            font-size: 1.6rem
+            line-height: 2rem
+            color: $indigo900
+            padding: 1rem 2rem
+
+            @include less-than(lg)
+                padding: 1rem 3rem
+
+            &:first-child
+                padding-left: 0
+
+    .copyright 
+        font-size: 1.6rem
+        line-height: 2rem
+        color: $slate400
+
+        .brackets
+            color: #F59E0B
+
+    .social-icons
+        margin-left: 5rem
+
+        @include less-than(sm)
+            margin: 2rem 0 0 0
+
+
+        li
+            width: 3rem
+            height: 3rem
+            display: flex
+            align-items: center
+            justify-content: center
+
+            &:not(:last-child)
+                margin-right: 2rem
+
+            a
+                padding: 0
+
+
+.cards
+    display: flex
+    flex-wrap: wrap
+    gap: 4rem
+
+    @include less-than(sm)
+        flex-direction: column
+        gap: 2rem
+
+.card
+    flex: 1 1 36%
+    background: $white
+    border-radius: 2rem
+    box-shadow: 0 1.4rem 4.0rem  rgba(0, 0, 0, 0.06)
+    padding: 3.2rem
+    @include transition-duration($dur)
+
+    /* &:hover { background-color: $slate50 } */    
+    
+    &:active
+        background-color: $sky50
+    
+    img
+        margin-bottom: 2.6rem
+
+    // header
+    h3,
+    p:first-of-type
+        color: $indigo900
+        font-weight: bold
+        line-height: 2.6rem
+
+    // text
+    p:last-of-type
+        margin-top: 1rem
+        font-size: 1.6rem
+        font-weight: 400
+        line-height: 2.6rem
+        color: $slate500
+        
+
+h1
+    font-weight: $fwExtraBold
+    font-size: 6.2rem
+    line-height: 1.2
+    color: $indigo900
+
+    +less-than(xl)
+        font-size: 5.2rem
+
+    +less-than(md)
+        font-size: 5.5rem
+        line-height: 1em
+
+    +less-than(sm)
+        font-size: 4.8rem
+    
+
+h2
+    font-weight: $fwExtraBold
+    font-size: 4.8rem
+    line-height: 1.55
+    color: $indigo900
+    margin: 0 0 4.8rem 0
+
+    @include less-than(xl)
+        font-size: 3.6rem
+        margin: 0 0 2.4rem 0
+
+    @include less-than(md)
+        font-size: 4rem
+        line-height: 1em
+
+    @include less-than(sm)
+        font-size: 3.5rem
+
+    &:last-child
+        margin-bottom: 0
+
+p
+    font-weight: $fwNormal
+    font-size: 2rem
+    line-height: 3.2rem
+    color: $slate500
+
+    +less-than(xl)
+        font-size: 1.8rem
+
+.btn
+    display: inline-flex
+    align-items: center
+    height: 6rem
+    padding: 0 2.4rem
+    cursor: pointer
+    font-family: $baseFont
+    font-weight: $fwBold
+    font-size: 1.6rem
+    line-height: 2rem
+    position: relative
+    border: 0
+    gap: 2rem
+    justify-content: center
+    border-radius: 2rem
+    @include appearance(none)
+    @include transition-duration($dur)
+    
+    @include less-than(sm)
+        height: 4.5rem
+        font-size: 1.5rem
+        border-radius: 1.5rem
+    
+    &.btn-primary
+        color: $white
+        background: $primary500
+
+        &:hover
+            background: $primary600
+
+        svg path
+            stroke: $white
+
+    &.btn-secondary
+        color: $indigo900
+        background: $white
+        border: 1px solid $slate200
+
+        &:hover
+            background: $slate50
+
+        svg path
+            stroke: $indigo900
+
+        @mixin dark-button
+            color: $white
+            border-color: $primary500
+            background: $primary500
+
+            &:hover
+                background: $primary600  
+
+            svg path
+                stroke: $white
+
+        #navigation &
+            body.scrolled &
+                @include dark-button
+
+            // to make button "Nezavazna ponuka" btn.secondary blue like primary when mobile menu
+            +less-than(md)
+                @include dark-button 
+
+.ac
+    margin-top: 2.4rem
+    border: 1px solid $slate200
+    border-radius: 2.4rem
+
+    @include less-than(sm)
+        border-radius: 1.2rem
+        margin-top: 1.5rem
+
+    .ac-header
+        font-weight: $fwBold
+        font-size: 1.6rem
+        line-height: 2.4rem
+        color: $slate900
+
+    .ac-trigger
+        display: flex
+        align-items: center
+        min-height: 6.4rem
+        padding: 2rem 2.4rem
+
+        @include less-than(sm)
+            min-height: 6rem
+            padding: 1rem 1.5rem
+            font-size: 1.5rem
+
+        &:focus
+            color: $slate900
+
+        &::after
+            content: '' !important
+            width: 1.7rem
+            height: 1.7rem
+            right: 2.4rem
+            top: 50%
+            transform: translate(0, -50%)
+            background: local-url('/images/plus.svg?7c0834edc906a9942436bf80bff68f68') no-repeat center
+            background-size: 100% auto
+            
+            @include less-than(sm)
+                width: 1.2rem
+                height: 1.2rem
+                right: 1.5rem
+    
+    .ac-panel
+        padding: 0 2.4rem 0
+
+        .ac-text
+            padding: 0
+            font-size: 1.6rem
+            line-height: 2.4rem
+            color: $slate500
+            margin-bottom: 2.4rem
+
+.mini-card
+    display: flex
+    align-items: center
+    justify-content: center
+    padding: 2.4rem
+    background: $white
+    border: 1px solid $slate200
+    cursor: pointer
+    border-radius: 2rem
+    @include transition-duration($dur)
+
+    @include less-than(md)
+        padding: 1.8rem
+        flex-direction: column
+
+    @include less-than(sm)
+        flex-direction: row
+
+    &:hover
+        background-color: $slate50
+
+    &.--active
+        background: $sky50
+        border-color: $sky200
+
+.mini-card__icon
+    display: flex
+    align-items: center
+    justify-content: center
+    width: 4.8rem
+    height: 4.8rem
+    min-width: 4.8rem
+    margin-right: 2.4rem
+
+    @include less-than(md)
+        margin-right: 0
+
+    @include less-than(sm)
+        margin-right: 2rem
+
+    img 
+        width: 100%
+        height: 100%
+        object-fit: cover
+
+.mini-card__content
+    @include less-than(md)
+        text-align: center
+        margin-top: 1rem
+
+    @include less-than(sm)
+        text-align: left
+        margin-top: 0
+
+    p
+        font-weight: $fwBold
+        font-size: 1.6rem
+        line-height: 2rem
+        color: $indigo900
+    
+.cookie-header
+    text-align: center
+    padding: 23rem 0 38rem
+    @include linearGradient(270deg, $sky50 0%, $white 100%)
+
+    @include less-than(lg)
+        padding: 20rem 0
+
+    h1
+        font-size: 4.8rem
+        line-height: 5.4rem
+        margin-bottom: 2.4rem
+
+.cookie-content 
+    position:relative
+    margin-top: -33rem
+    margin-bottom: 10rem
+    padding: 0 2rem
+
+    @include less-than(lg)
+        margin-top: -15rem
+
+    .wrapper
+        max-width: 116rem
+        padding: 4rem
+        background: $white
+        @include shadow(0, 3rem, 6.6rem, 0, rgba(0, 0, 0, 0.06))
+        border-radius: 3.2rem
+
+        h4
+            color: $indigo900
+            font-weight: $fwBold
+            font-size: 2rem
+            line-height: 2.6rem
+            margin-bottom: 2.4rem
+
+        h6
+            font-size: 1.6rem
+            line-height: 2.6rem
+            font-weight: $fwBold
+            color: $slate900
+            margin-bottom: 2.4rem
+
+        p
+            font-size: 1.6rem
+            line-height: 2.6rem
+            margin-bottom: 2.4rem
+
+        ul, ol
+            margin-bottom: 2.4rem
+
+            li
+                font-size: 1.6rem
+                line-height: 2.6rem
+                
+    
+
+section.section-heading
+    position: relative
+    padding: 23rem 0 9rem
+    text-align: center
+    @include linearGradient(270deg, $sky50 0%, $white 100%)
+
+    @include less-than(lg)
+        padding-top: 20rem
+
+    body.contact &
+        padding: 23rem 0 38rem
+
+        @include less-than(lg)
+            padding: 20rem 0
+
+    .wrapper > *
+        position: relative
+        z-index: 2
+
+    h1
+        font-size: 4.8rem
+        line-height: 7.4rem
+        margin-bottom: 2.4rem
+
+        @include less-than(md)
+            padding: 0 8rem
+            line-height: 1.2em
+
+        @include less-than(sm)
+            padding: 0
+            font-size: 3.5rem
+            line-height: 1em
+            margin-bottom: 1.6rem
+
+    .bg-image
+        position: absolute
+        z-index: 0
+        top: 20rem
+        right: 0
+        max-width: 60rem
+        width: 100%
+
+        @include less-than(lg)
+            top: 10rem
+            max-width: 50rem
+
+        @include less-than(sm)
+            top: 7rem
+            max-width: 60vw
+
+        // to prevent underlying under header text
+        body.opportunity &
+            @include less-than(xxl)
+                right: auto
+                left: 50%
+                margin-left: 20%
+
+            @include less-than(lg)
+                margin-left: 33%
+
+            @include less-than(md)
+                margin-left: 40%
+                top: 2rem
+
+            @include less-than(sm)
+                margin-left: 37.5%
+                top: -7.5rem
+
+        // to prevent underlying under header text
+        body.contact &
+            top: 19rem
+
+            @include less-than(xxl)
+                right: auto
+                left: 50%
+                margin-left: 20%
+
+            @include less-than(lg)
+                top: 12rem              
+                margin-left: 25%
+
+            @include less-than(md)
+                display: none
+
+    .cards
+        text-align: left
+        margin-top: 6rem
+
+section.join-us
+    padding: 15rem 0
+
+    @include less-than(sm)
+        padding: 8rem 0
+
+    & > .wrapper
+        display: flex
+        gap: 4rem
+
+        @include less-than(sm)
+            display: block
+            gp: 2rem
+
+    .button-down
+        position: absolute
+        left: 50%
+        top: 0
+        transform: translate(-50%, -50%)
+
+    .content
+        max-width: calc(50% - 2rem)
+
+        +less-than(sm)
+            max-width: 100%
+
+        & > p 
+            font-size: 1.8rem
+            margin-bottom: 4.4rem
+
+        & > .btn-primary
+            display: flex
+            width: 100%
+            justify-content: center
+
+        .logos
+            display: flex
+            align-items: center
+            gap: 8rem
+            margin-bottom: 5rem
+
+        .returns
+            display: flex
+            justify-content: space-between
+            text-align: center
+            margin-bottom: 4.4rem
+
+            @include less-than(xl)
+                flex-wrap: wrap
+                gap: 0
+
+                &>div
+                    margin: 1rem 0
+                    min-width: 50%
+
+            @include less-than(md)
+                flex-wrap: wrap
+                gap: 4rem
+
+                &>div
+                    margin: 0
+                    min-width: calc(50% - 2rem)
+
+            h4
+                font-weight: $fwBlack
+                font-size: 4.8rem
+                line-height: 6rem
+                color: $primary500
+
+            p
+                font-weight: $fwExtraBold
+                font-size: 1.6rem
+                line-height: 2rem
+
+    .images
+        max-width: calc(50% - 2rem)
+        min-width: 60rem
+        min-height: 80rem
+        position: relative
+        transform: translate(25%, 4%)
+
+        +less-than(lg)
+            transform: translate(10%, 3%)
+
+        +less-than(md)
+            transform: translate(0%, 0%)
+
+        $img-pad: 2rem
+
+        +less-than(sm)
+            margin-top: 4rem
+            left: 50%
+            +translate(-50%, 0)
+        
+        +less-than(xs)
+            text-align: center
+
+        img
+            position: absolute
+            max-width: calc(50% - 1rem)
+            border-radius: 2rem
+
+            +less-than(sm)
+                &:not(#_)
+                    position: static
+                    display: inline-block
+                    width: calc(49.5% - #{2*$img-pad})
+                    max-width: none
+                    margin: $img-pad
+
+                    &:nth-child(2)
+                        float: left
+
+            +less-than(xs)
+                &:not(#_)
+                    width: calc(70% - #{2*$img-pad})
+
+                    &:nth-child(2)
+                        float: none
+
+            &:nth-child(1)
+                top: 0
+                right: 0
+
+            &:nth-child(2)
+                top: 10rem
+                left: 5rem
+                max-width: calc(50% - 6rem)
+
+            &:nth-child(3)
+                top: 18.5rem
+                right: 0
+
+            &:nth-child(4)
+                top: 44.5rem
+                left: 0
+
+            &:nth-child(5)
+                top: 37rem
+                right: 5rem
+                max-width: calc(50% - 6rem)
+
+section.contact-form
+    margin-top: -33rem
+    padding: 0 2rem
+
+    @include less-than(lg)
+        margin-top: -15rem
+
+    .wrapper
+        max-width: 116rem
+        background: $white
+        padding: 0
+        overflow: hidden
+        display: flex
+        @include shadow(0, 3rem, 6.6rem, 0, rgba(0, 0, 0, 0.06))
+        border-radius: 3.2rem
+
+        @include less-than(md)
+            display: block
+
+        .form
+            flex-grow: 1
+            padding: 4rem
+
+            & > p
+                font-size: 1.8rem
+                line-height: 3.2rem
+                color: $black
+                margin-bottom: 2.4rem
+
+            .formInput.consent 
+                min-width: 100%
+
+            .btn-primary
+                min-width: calc(50% - 2rem)
+                max-width: calc(50% - 2rem)
+
+                @include less-than(sm)
+                    min-width: 100%
+
+        .content
+            padding: 4rem
+            max-width: 35rem
+            min-width: 35rem
+            background: $primary500
+
+            @include less-than(md)
+                max-width: 100%
+
+            h2
+                color: $white
+                font-weight: $fwBold
+                font-size: 2.4rem
+                line-height: 3.2rem
+                margin-bottom: 2.4rem
+
+            p 
+                font-size: 1.6rem
+                line-height: 2.2rem
+                color: $primary200
+
+            h3
+                font-weight: $fwBold
+                font-size: 1.6rem
+                line-height: 3.2rem
+                color: $white
+                margin: 5.5rem 0 2.4rem
+
+            .contacts
+                display: flex
+                flex-direction: column
+                gap: 2.4rem
+
+                &>div
+                    position: relative
+                    min-height: 2rem
+                    padding-left: 3.4rem
+
+                .icon
+                    position: absolute
+                    top: 50%
+                    left: 0
+                    width: 2rem
+                    @include translate(0, -50%, 0)
+
+                .text
+                    font-weight: $fwMedium
+                    font-size: 1.6rem
+                    line-height: 2rem
+                    color: $white
+                    display: block
+
+                .show-on-map
+                    margin-top: 0.5rem
+                    display: block
+                    font-size: 1.2rem
+                    line-height: 1.5rem
+                    color: $secondary400
+
+            .company-info
+                margin-top: 5.6rem
+                font-size: 1.2rem
+                color: $primary200
+                line-height: 1.5rem
+
+                span
+                    display: block
+                    margin-bottom: 1.6rem
+
+            .socials
+                margin-top: 2.4rem
+                display: flex
+                align-items: center
+                gap: 2.4rem
+
+
+
+
+section#form-inquiry
+    padding: 23rem 2.5rem 9rem
+    @include linearGradient(270deg, $sky50 0%, $white 100%)
+
+    @include less-than(lg)
+        padding-top: 15rem
+
+    .form-page-header
+        text-align: center
+        max-width: 86rem
+        margin: 0 auto 6rem
+
+        h1,
+        h2
+            font-size: 4.8rem
+            line-height: 1.2em
+            margin-bottom: 2.4rem
+            display: flex
+            align-items: center
+            justify-content: center
+            gap: 2rem
+
+            @include less-than(sm)
+                font-size: 4rem
+
+            svg 
+                @include less-than(sm)
+                    max-width: 5rem
+
+.form__card
+    max-width: 86rem
+    margin: 0 auto
+    background: $white
+    padding: 4rem
+    position: relative
+    @include shadow(0, 3rem, 6.6rem, -0.1rem, rgba(0, 0, 0, 0.06))
+    border-radius: 3.2rem
+
+    @include less-than(sm)
+        padding: 3rem
+
+    .backButton
+        position: absolute
+        left: 4rem
+        top: 4rem
+        display: flex
+        align-items: center
+        gap: 1rem
+        cursor: pointer
+
+        @include less-than(sm)
+            left: 3rem
+            top: 3rem
+
+        span
+            font-size: 1.6rem
+            line-height: 2rem
+            color: #2B5093
+
+.form__stepIndicator
+
+    .stepIndicator
+        display: flex
+        align-items: center
+        justify-content: center
+        gap: 4rem
+
+        @include less-than(sm)
+            justify-content: flex-end
+            gap: 2rem
+
+.form__stepDot
+    width: 2rem
+    height: 2rem
+    position: relative
+    border: 1px solid #CBD5E1
+    border-radius: 50%
+
+    &.--active
+        border-color: $primary500
+        background: $primary500
+
+    &.--filled
+        &::after
+            background-color: $primary500
+
+    &:last-child
+        &::after
+            display: none
+
+    &::after
+        content: ''
+        width: 4rem
+        height: 1px
+        background: #CBD5E1
+        position: absolute
+        left: calc(100% + 1px)
+        top: 50%
+
+        @include less-than(sm)
+            width: 2rem
+
+.form__cardTitle
+    margin: 2.4rem 0
+
+    h3
+        font-weight: $fwBold
+        font-size: 2.4rem
+        line-height: 3.2rem
+        color: $black
+
+    p
+        font-size: 1.8rem
+        line-height: 3.2rem
+        color: $black
+
+.form__cardContent
+
+    & > h3
+        font-weight: $fwBold
+        font-size: 2.4rem
+        line-height: 3.2rem
+        color: $black
+        margin-bottom: 2.4rem
+
+    .btn-primary
+        width: 100%
+        justify-content: center
+
+.content__tabs
+    display: flex
+    gap: 2.4rem
+    margin-bottom: 2.4rem
+
+    @include less-than(sm)
+        flex-direction: column
+        gap: 1.6rem
+
+    & > *
+        flex: 1
+
+    .form__cardTitle &
+        position: relative
+        gap: 4rem
+        margin-top: 2.4rem
+
+        & > svg
+            position: absolute
+            z-index: 5
+            top: 50%
+            left: 50%
+            transform: translate(-3rem, -50%)
+
+            @include less-than(sm)
+                transform: translate(-50%, -1.3rem) rotate(90deg)
+
+        & > .form__radioTab
+            background: $sky50
+            border: 1px solid $sky200
+
+
+.cardContent__inputs
+    display: flex
+    flex-wrap: wrap
+    justify-content: space-between
+
+    & > span
+        display: contents
+
+        & > span
+            display: contents
+
+    
+    .formInput,
+    .addNote
+        min-width: calc(50% - 2rem)
+        max-width: calc(50% - 2rem)
+
+        @include less-than(sm)
+            min-width: 100%
+
+
+.multiselect__tags
+    min-height: 6.6rem
+    background: $white
+    border: 1px solid $slate200
+    border-radius: 2rem
+    padding: 2.9rem 2.4rem 0
+
+    .multiselect--active &
+        border-color: $indigo900
+        border-radius: 2rem !important
+
+.multiselect__placeholder
+    margin-bottom: 0
+    padding-top: 0
+    font-weight: $fwBold
+    font-size: 1.6rem
+    line-height: 2rem
+    color: $slate500
+
+.multiselect__input
+    padding: 0.5rem 0 0 0
+    font-size: 1.6rem
+    line-height: 2rem
+    font-weight: $fwBold
+    color: $indigo900
+
+.multiselect__single
+    padding: 0.5rem 0 0 0
+    font-size: 1.6rem
+    line-height: 2rem
+    font-weight: $fwBold
+    color: $indigo900
+
+.multiselect__select
+    height: 100%
+    padding: 0
+    margin: 0
+    width: 2rem
+    right: 2.5rem
+    display: flex
+    align-items: center
+    justify-content: center
+    z-index: 20
+    pointer-events: none
+
+    &::before
+        content: ''
+        width: 2rem
+        height: 2rem
+        border: 0
+        padding: 0
+        margin: 0
+        position: relative
+        top: auto
+        right: auto
+        background: local-url('/images/chevron-down.svg?dbb23f5cc63123b0b7d35ee904e27a09') no-repeat center
+
+
+.multiselect__content-wrapper
+    z-index: 120
+    margin-top: 0.5rem
+    background: $white
+    border: 1px solid $slate200
+    border-radius: 2rem
+    @include shadow(0, 0.8rem, 2.4rem, -0.1rem, rgba(0, 0, 0, 0.06))
+
+    .multiselect--active &
+        border: 1px solid $slate200 
+        border-radius: 2rem !important
+
+    .multiselect--above &
+        margin-top: 0rem
+        margin-bottom: 0.5rem
+
+.multiselect__option
+    font-weight: $fwBold
+    font-size: 1.6rem
+    line-height: 2rem
+    color: $indigo900 !important
+    padding-left: 2.4rem
+    padding-right: 2.4rem
+
+    &.multiselect__option--selected
+        background: local-url('/images/blue-check.svg?c97c660acff4852bde12ffd485aa4a24') $sky50 no-repeat right 1.4rem center !important
+
+    &.multiselect__option--highlight
+        background: $sky50
+
+.formInput
+    position: relative
+    z-index: 1
+    margin-bottom: 2.4rem
+
+    &.city
+        z-index: 3
+
+    @include less-than(sm)
+        margin-bottom: 1.6rem
+
+    label
+        font-size: 1.6rem
+        line-height: 2rem
+        color: $slate500
+        pointer-events: none
+        position: absolute
+        z-index: 90
+        //background: $white
+        left: 2.4rem
+        top: 1.2rem
+
+    //error message
+    & > span
+        //display: none
+        padding-top: 1rem
+        line-height: 1.5em
+
+    input[type="text"]:not(.multiselect__input),
+    input[type="email"],
+    textarea
+        width: 100%
+        height: 6.6rem
+        font-size: 1.6rem
+        line-height: 2rem
+        font-weight: $fwBold
+        padding: 3.2rem 2.4rem 1.2rem
+        color: $indigo900
+        background: $white
+        border: 1px solid $slate200
+        box-sizing: border-box
+        resize: none
+        border-radius: 2rem
+        @include appearance(none)
+
+        &:disabled
+            color: $black
+            background: $slate50
+            border: 1px solid $slate100
+
+.addNote
+    margin-bottom: 2.4rem
+    display: flex
+    align-items: center
+    cursor: pointer
+    max-height: 6.6rem
+
+    @include less-than(sm)
+        margin-bottom: 1.6rem
+
+    & > div
+        display: flex
+        gap: 1rem
+        font-size: 1.6rem
+        line-height: 3.2rem
+        color: $primary500
+
+input[type="checkbox"]
+    position: absolute
+    cursor: pointer
+    height: 0
+    width: 0
+    opacity: 0
+
+    &:disabled ~ label:before,
+    &:disabled ~ h4:before
+        opacity: 0.5
+        filter: grayscale(0.5)
+    
+
+    &:checked ~ label:before,
+    &:checked ~ h4:before
+        background: local-url('/images/check.svg?6e3540c505f86d0c4f1fac8da3191444') $primary500 no-repeat center
+        border-color: $primary500
+
+    & ~ label,
+    & ~ h4
+        position: relative
+        background: transparent
+        pointer-events: auto
+        font-size: 1.6rem
+        line-height: 2.1rem
+        user-select: none
+        color: #0F172A
+        top: 0
+        left: 0
+        cursor: pointer
+        display: block
+        padding-left: 3.4rem
+
+        &::before
+            content: ''
+            position: absolute
+            left: 0
+            width: 2.4rem
+            height: 2.4rem
+            min-width: 2.4rem
+            border: 1px solid $slate400
+            margin-right: 1rem
+            border-radius: 0.8rem
+            top: -0.4rem
+
+        a
+            text-decoration: underline
+
+
+.form__radioTab
+    cursor: pointer
+    background: $white
+    padding: 2.4rem
+    display: flex
+    flex-direction: column
+    align-items: center
+    position: relative
+    border: 1px solid $slate200
+    border-radius: 2rem
+
+    .form__radioTabCheckMark
+        width: calc(100% + 2px)
+        height: calc(100% + 2px)
+        background: $sky50
+        position: absolute
+        left: -1px
+        top: -1px
+        border: 1px solid $sky200
+        opacity: 0
+        border-radius: 2rem
+        @include transition-duration(0.3s)
+
+        &::after
+            content: ''
+            width: 2.5rem
+            height: 2.4rem
+            position: absolute
+            top: 1.7rem
+            right: 3.2rem
+            background: local-url('/images/check-indicator.svg?4cedef998d3ec4422593db61f8de994b') no-repeat center
+            background-size: 100% auto
+            opacity: 0
+            @include transition-duration(0.3s)
+
+
+    input
+        position: absolute
+        top: 0
+        left: 0
+        opacity: 0
+
+        &:checked
+            & ~ .form__radioTabCheckMark
+                opacity: 1
+
+                &::after
+                    opacity: 1
+
+    img
+        position: relative
+        z-index: 2
+
+    .description
+        position: relative
+        z-index: 2
+        font-weight: $fwBold
+        font-size: 1.6rem
+        line-height: 2rem
+        color: $indigo900
+        margin-top: 2.4rem
+        text-align: center
+
+.form-extra-offers
+    max-width: 86rem
+    margin: 6rem auto 0
+    justify-content: center
+
+    br 
+        display: none
+
+.extra-offers,
+.form-extra-offers
+    flex-basis: 100%
+    margin-top: 6.1rem
+    display: flex    
+    gap: 7rem
+
+    @include less-than(md)
+        justify-content: center
+
+    @include less-than(sm)
+        gap: 4rem
+        margin-top: 4rem
+        text-align: center
+        
+    .offer:not(#_) // stronger selector
+        display: flex
+        align-items: center
+
+        // no support for gap
+        margin-right: 7rem
+        &:last-child
+            margin-right: 0
+            
+        @supports (gap: 0)
+            margin-right: 0
+
+        @include less-than(sm)
+            flex-direction: column
+            align-items: center
+
+        .icon
+            display: inline-block
+            width: 4.2rem
+            height: 4.2rem
+            background-color: $sky50
+            background-repeat: no-repeat
+            background-position: center center
+            border-radius: 1.2rem
+
+            @include less-than(sm)
+                margin-bottom: 1rem
+
+            &.icon-48-hours
+                background-image: local-url('/images/icon-clock.svg?a371df0619b77f40fa85c1ebc8cc9469')
+
+            &.icon-handshake
+                background-image: local-url('/images/icon-handshake.svg?bbff4efd657c2f7f580feccee5bc8abb')
+
+        p
+            margin-left: 1.6rem
+            color: $slate900
+            font-size: 1.6rem
+            line-height: 2rem
+            margin-bottom: 0
+
+            @include less-than(sm)
+                margin-left: 0
+
+.vm--container
+    z-index: 2000 !important
+
+.vm--overlay
+    background: rgba(0, 0, 0, 0.7)
+
+.vm--modal 
+    
+    border-radius: 3.2rem !important
+
+    +less-than(sm)
+        max-width: 90%
+        margin-left: 5%
+        border-radius: 2rem !important
+
+
+[data-modal="join-us"] + .glModal 
+    .glModal__content
+        text-align: left
+        padding: 4rem
+
+        h2
+            margin-bottom: 0
+
+        & > p
+            margin-bottom: 2.4rem
+
+        .formInput.consent
+            min-width: 100%
+
+        .btn-primary
+            display: flex
+            min-width: 100%
+
+.glModal__content
+    padding: 6.4rem 4rem 4rem
+    text-align: center
+
+    & > div:first-child
+        svg
+            position: absolute
+            top: 4rem
+            right: 4rem
+
+    @include less-than(sm)
+        padding: 3.2rem 2rem 2rem
+
+    .cookie-emoji
+        font-size: 4.4rem
+        text-align: center
+        margin-bottom: 4rem
+        position: relative
+        // hide original text
+        text-indent: -1000em
+
+        &::before
+           content: ''
+           background: local-url('/images/cookie.png?bef0fe4c5de953b77325294b2a3bf4f8')  no-repeat center center
+           background-size: contain
+           position: absolute
+           $size: 4.2rem
+           width: $size
+           height: $size
+           left: 50%
+           top: 50%
+           margin-top: -0.5 * $size
+           margin-left: -0.5 * $size
+
+
+    h2
+        font-size: 2.4rem
+        line-height: 3.2rem
+        color: $black
+        margin-bottom: 1.2rem
+
+    p
+        font-size: 1.6rem
+        line-height: 2.4rem
+        color: $black
+
+    .btns
+        display: flex
+        gap: 2.4rem
+        margin-top: 4rem
+
+        @include less-than(sm)
+            flex-direction: column
+            gap: 1rem
+
+        & > *
+            flex: 1
+            justify-content: center
+
+            @include less-than(sm)
+                flex: auto
+        
+[data-modal="cookies"] + .glModal
+        
+    label[for="required"],
+    label[for="analytics"],
+    label[for="marketing"]
+        display: block
+        text-align: left
+        padding: 4rem 0
+        border-top: 1px solid  #CBD5E1
+        cursor: pointer
+
+        &:first-child
+            border-top: 0
+            margin-top: 1rem
+
+        &:last-child
+            padding-bottom: 0.65em
+
+        h4
+            color: black
+            font-size: 1.8rem
+            font-weight: 500
+            line-height: 2.0rem
+            padding-left: 3.8rem
+
+        p
+            color: black
+            font-size: 1.4rem
+            font-weight: 400
+            line-height: 1.8rem
+            padding-left: 3.8rem
+            margin-top: 0.35em
+
+    .btn-collapse
+        flex-basis: 6.6rem
+        flex-grow: 0
+
+        
+    
+
+
+@keyframes slide-up
+    
+    $space: 5%
+    $hold: 20%
+
+    0%
+        transform: translateY(0%)
+
+    #{$space*1 + $hold*0}
+        transform: translateY(-25%)
+    #{$space*1 + $hold*1}
+        transform: translateY(-25%)
+
+    #{$space*2 + $hold*1}
+        transform: translateY(-50%)
+    #{$space*2 + $hold*2}
+        transform: translateY(-50%)
+
+    #{$space*3 + $hold*2}
+        transform: translateY(-75%)
+    #{$space*3 + $hold*3}
+        transform: translateY(-75%)
+
+    #{$space*4 + $hold*3}
+        transform: translateY(0%)
+    100%
+        transform: translateY(0%)
+
+
+@keyframes waving
+    0%
+        transform: translateY(10%)
+    50%
+        transform: translateY(-35%)
+    100%
+        transform: translateY(10%)
+
+@keyframes wavingMobile
+    0%
+        transform: translateY(10%) scale(0.8)
+    50%
+        transform: translateY(-35%) scale(0.8)
+    100%
+        transform: translateY(10%) scale(0.8)
+
+
+@keyframes hexagon
+
+    $hex-offset: 0.035
+    $hex-step: 100%/6
+
+    #{0 * $hex-step}
+        transform: translate(50% * $hex-offset, 90% * $hex-offset)
+    #{1 * $hex-step}
+        transform: translate(-50% * $hex-offset, 90% * $hex-offset)
+    #{2 * $hex-step}
+        transform: translate(-100% * $hex-offset, 0% * $hex-offset)
+    #{3 * $hex-step}
+        transform: translate(-50% * $hex-offset, -90% * $hex-offset)
+    #{4 * $hex-step}
+        transform: translate(50% * $hex-offset, -90% * $hex-offset)
+    #{5 * $hex-step}
+        transform: translate(100% * $hex-offset, 0% * $hex-offset)
+    #{6 * $hex-step}
+        transform: translate(50% * $hex-offset, 90% * $hex-offset)
+    
