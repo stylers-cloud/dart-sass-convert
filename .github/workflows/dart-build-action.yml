@@ -1,10 +1,8 @@
 name: Dart Build CI
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -22,11 +20,10 @@ jobs:
         run: dart pub get
 
       - name: Build
-        run: dart compile exe -o sass2scss_${{matrix.os}} bin/sass_scss_dart.dart
+        run: dart compile exe -o sass2scss_${{matrix.os}}.exe bin/sass_scss_dart.dart
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.0.0
         with:
           name: sass2scss_${{matrix.os}}
-          path: sass2scss_${{matrix.os}}
-
+          path: sass2scss_${{matrix.os}}.exe
