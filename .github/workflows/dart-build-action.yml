@@ -1,8 +1,9 @@
 name: Dart Build CI
 
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
   build:
@@ -26,3 +27,8 @@ jobs:
         with:
           name: sass2scss_${{matrix.os}}
           path: sass2scss_${{matrix.os}}.exe
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: sass2scss_${{matrix.os}}.exe
