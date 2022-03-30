@@ -20,7 +20,7 @@ jobs:
         run: dart pub get
 
       - name: Build
-        run: dart compile exe -o sass2scss_${{matrix.os}}.exe bin/sass_tools.dart
+        run: dart compile exe -o sass2scss_${{matrix.os}}.exe bin/sass2scss.dart
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.0.0
