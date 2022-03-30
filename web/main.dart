@@ -1,4 +1,4 @@
-import 'package:sass_scss_dart/sass2scss.dart';
+import 'package:sass_tools/sass2scss.dart';
 
 void main() {
   var sassInput = '''

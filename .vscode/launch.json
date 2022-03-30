@@ -8,10 +8,10 @@
             "name": "Dart",
             "type": "dart",
             "request": "launch",
-            "program": "bin/sass_scss_dart.dart"
+            "program": "bin/sass_tools.dart"
         },
         {
-            "name": "sass-scss-dart",
+            "name": "sass-tools-dart",
             "request": "launch",
             "type": "dart"
         }
