@@ -1,5 +1,5 @@
-name: sass_tools
-description: Command line application for transforming Sass
+name: dart-sass-convert
+description: Command line application for transforming SASS syntax to SCSS syntax (and maybe more in future).
 version: 1.0.0
 
 environment:

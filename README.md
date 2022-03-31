@@ -1,6 +1,6 @@
-# Sass Tools
+# Dart SASS Convert
 
-## sass2scss
+## Convert SASS to SCSS
 
 Convert SASS syntax from stdin to SCSS syntax on stdout.
 
