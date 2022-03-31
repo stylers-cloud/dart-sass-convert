@@ -2,9 +2,9 @@
 
 ## sass2scss
 
-convert Sass from stdin to SCSS on stdout
+Convert SASS syntax from stdin to SCSS syntax on stdout.
 
 eg.
 ```
-sass2scss_${OS} < file.sass  > file.scss
+sass2scss_${OS} < file.sass > file.scss
 ```
