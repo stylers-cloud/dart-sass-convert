@@ -1,5 +1,5 @@
 import 'package:sass_api/sass_api.dart';
-import 'package:sass_tools/sass2scss.dart';
+import 'package:dart_sass_convert/sass2scss.dart';
 import 'package:test/test.dart';
 import 'dart:io';
 import 'package:sass/sass.dart' as sass;

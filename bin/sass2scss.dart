@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:sass_tools/sass2scss.dart';
+import 'package:dart_sass_convert/sass2scss.dart';
 
 String? readInputSync(Encoding encoding) {
   final List<int> input = [];

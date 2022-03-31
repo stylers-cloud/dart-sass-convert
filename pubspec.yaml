@@ -1,4 +1,4 @@
-name: dart-sass-convert
+name: dart_sass_convert
 description: Command line application for transforming SASS syntax to SCSS syntax (and maybe more in future).
 version: 1.0.0
 
