@@ -1,0 +1,24 @@
+// stylers.cloud project id
+$projectId: 'd9a47ea0-b65e-11ec-8c5e-e3ee7fbdbfdf'
+// relative path from location of this CSS file to the assets (without slash at the end)
+$local-url-prefix: '..'
+// absolute path to our CDN server (without slash at the end)
+$hosted-url-prefix: '//assets.stylers.cloud/' + $projectId
+// map of hosted assets relative urls to hash codes
+$hosted-assets-map: ('/gaugan_output.jpg': 'f209c83d65387b2e7d8f5e5b9a8cfdf6')
+
+@function local-url($relative-path)
+    @return url($local-url-prefix + $relative-path)
+
+@function external-url($absolute-path)
+    @return url($absolute-path)
+
+@function hosted-url($relative-path)
+    @return url($hosted-url-prefix +'/'+ map-get($hosted-assets-map, $relative-path))+'/* ' + $relative-path + ' */'
+
+
+html
+    background: external-url('https://example.sk/api-media/media/image/sme/3/77/example/example_180x120.jpg?rev=23')
+
+h1
+    background: hosted-url('/gaugan_output.jpg')

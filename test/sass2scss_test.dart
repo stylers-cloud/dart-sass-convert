@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:sass/sass.dart' as sass;
 
 void main() {
-  var sassInput = File('./test/input/brackets.sass').readAsStringSync();
+  var sassInput = File('./test/input/assets.sass').readAsStringSync();
 
   test('sass2scss results in same compressed css', () {
     var scssOutput = sass2scss(sassInput);
