@@ -26,6 +26,7 @@ class Visitor implements sass_api.RecursiveAstVisitor {
       indentation += 1;
       visitChildren(children);
       indentation -= 1;
+      output += "\n";
       writeL("}");
     }
     if (addNewline) output += "\n";
@@ -130,7 +131,7 @@ class Visitor implements sass_api.RecursiveAstVisitor {
             "\$${e.name}${e.defaultValue != null ? ": ${e.defaultValue}" : ""}")
         .join(", ");
     output += ")";
-    nextBlock(node, false);
+    nextBlock(node, true);
     if (node.children.isEmpty) output += ";\n";
   }
 
